@@ -47,11 +47,21 @@ class Hero:
         """
         print(str(self.name) + ":" + str(self.attack), self.defence, self.hp, self.get_fraction())
 
+    def dealDamage(self):
+        return self.attack
+    
 
 class Archer(Hero):
-    def __init__(self, attack: int, defence: int, hp: int, name: str, f_id:int) -> None:
+    def __init__(self, name: str, f_id:int, attack = 50, defence = 30, hp = 100) -> None:
         super().__init__(attack, defence, hp, name, f_id)
 
 
-a = Archer(attack=10, defence=20, hp=100, name="Друид", f_id=4)
-a.print_stats()
+class Warrior(Hero):
+    def __init__(self, name: str, f_id:int, attack = 60, defence = 30, hp = 100) -> None:
+        super().__init__(attack, defence, hp, name, f_id)
+
+
+class Mage(Hero):
+    def __init__(self, name: str, f_id:int, attack = 50, defence = 30, hp = 100) -> None:
+        super().__init__(attack, defence, hp, name, f_id)
+
