@@ -14,11 +14,11 @@ class Hero:
         self.f_id = f_id
 
         # ! Выдача бафаов в зависимости от фракции
-        if self.fraction_buff[f_id] == "hp":
+        if self.fraction_buff.get(f_id) == "hp":
             self.hp *= 1.25
-        elif self.fraction_buff[f_id] == "defence":
+        elif self.fraction_buff.get(f_id) == "defence":
             self.defence *= 1.25
-        elif self.fraction_buff[f_id] == "attack":
+        elif self.fraction_buff.get(f_id) == "attack":
             self.attack *= 1.25
 
     # Бафы фракций по Id
@@ -39,7 +39,7 @@ class Hero:
         """
             Получение названия фракции героя
         """
-        return self.fractions[self.f_id]
+        return self.fractions.get(self.f_id, "")
 
     def print_stats(self):
         """
@@ -53,5 +53,5 @@ class Archer(Hero):
         super().__init__(attack, defence, hp, name, f_id)
 
 
-a = Archer(attack=10, defence=20, hp=100, name="Друид", f_id=2)
+a = Archer(attack=10, defence=20, hp=100, name="Друид", f_id=4)
 a.print_stats()
