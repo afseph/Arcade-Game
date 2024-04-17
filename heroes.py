@@ -32,7 +32,7 @@ class Hero:
     fractions = {
         1:"Люди",
         2:"Эльфы",
-        3:"Дракониды"
+        3:"Хомяки"
     }
 
     def get_fraction(self):
@@ -51,17 +51,29 @@ class Hero:
         return self.attack
     
 
+#1
 class Archer(Hero):
-    def __init__(self, name: str, f_id:int, attack = 50, defence = 30, hp = 100) -> None:
+    def __init__(self, name: str, f_id:int, attack = 50, defence = 30, hp = 85) -> None:
         super().__init__(attack, defence, hp, name, f_id)
 
-
+#2
 class Warrior(Hero):
-    def __init__(self, name: str, f_id:int, attack = 60, defence = 30, hp = 100) -> None:
+    def __init__(self, name: str, f_id:int, attack = 60, defence = 30, hp = 130) -> None:
         super().__init__(attack, defence, hp, name, f_id)
 
-
+#3
 class Mage(Hero):
-    def __init__(self, name: str, f_id:int, attack = 50, defence = 30, hp = 100) -> None:
+    def __init__(self, name: str, f_id:int, attack = 50, defence = 30, hp = 70) -> None:
         super().__init__(attack, defence, hp, name, f_id)
+
+#4
+class Medic(Hero):
+    def __init__(self, name: str, f_id:int, attack = 10, defence = 30, hp = 100) -> None:
+        super().__init__(attack, defence, hp, name, f_id)
+
+#5
+class Assasion(Hero):
+    def __init__(self, name: str, f_id:int, attack = 75, defence = 30, hp = 60) -> None:
+        super().__init__(attack, defence, hp, name, f_id)
+
 
