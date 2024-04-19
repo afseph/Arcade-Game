@@ -53,29 +53,52 @@ class Hero:
 
 #1
 class Archer(Hero):
-    def __init__(self, name: str, f_id:int, attack = 50, defence = 30, hp = 85) -> None:
+    def __init__(self, f_id:int, name="Лучник", attack = 50, defence = 30, hp = 85) -> None:
+        names = {
+            1:"Лучник"
+        }
         if f_id == 1:
-            name = "Лучник"
+            name = names.get(f_id)
         super().__init__(attack, defence, hp, name, f_id)
 
 #2
 class Warrior(Hero):
-    def __init__(self, name: str, f_id:int, attack = 60, defence = 30, hp = 130) -> None:
+    def __init__(self, f_id:int, name="Воин", attack = 60, defence = 30, hp = 130) -> None:
+        names = {
+            1:"Воин"
+        }
+        if f_id == 1:
+            name = names.get(f_id)
         super().__init__(attack, defence, hp, name, f_id)
 
 #3
 class Mage(Hero):
-    def __init__(self, name: str, f_id:int, attack = 50, defence = 30, hp = 70) -> None:
+    def __init__(self, f_id:int, name="Маг", attack = 50, defence = 30, hp = 70) -> None:
+        names = {
+            1:"Маг"
+        }
+        if f_id == 1:
+            name = names.get(f_id)
         super().__init__(attack, defence, hp, name, f_id)
 
 #4
 class Medic(Hero):
-    def __init__(self, name: str, f_id:int, attack = 10, defence = 30, hp = 100) -> None:
+    def __init__(self, f_id:int, name="Медик", attack = 10, defence = 30, hp = 100) -> None:
+        names = {
+            1:"Медик"
+        }
+        if f_id == 1:
+            name = names.get(f_id)
         super().__init__(attack, defence, hp, name, f_id)
 
 #5
-class Assasion(Hero):
-    def __init__(self, name: str, f_id:int, attack = 75, defence = 30, hp = 60) -> None:
+class Assasin(Hero):
+    def __init__(self, f_id:int, name="Ассасин", attack = 75, defence = 30, hp = 60) -> None:
+        names = {
+            1:"Ассасин"
+        }
+        if f_id == 1:
+            name = names.get(f_id)
         super().__init__(attack, defence, hp, name, f_id)
 
 
