@@ -54,6 +54,8 @@ class Hero:
 #1
 class Archer(Hero):
     def __init__(self, name: str, f_id:int, attack = 50, defence = 30, hp = 85) -> None:
+        if f_id == 1:
+            name = "Лучник"
         super().__init__(attack, defence, hp, name, f_id)
 
 #2
