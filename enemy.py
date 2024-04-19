@@ -10,3 +10,6 @@ class Enemy:
         self.defence = defence
         self.hp = hp
         self.name = name
+    
+    def print_stats(self):
+        print(self.hp)

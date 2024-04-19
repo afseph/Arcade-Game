@@ -1,4 +1,5 @@
 from story import shop, storyStartGame, shopForLVL1
+import fights
 from lvl import startLVL
 import heroes
 
@@ -12,9 +13,9 @@ class Game():
 
     # TODO Создать array с class для каждого отряда собранного на уровень
     otr = shop(f_id=f_id)
-
-    for u in otr:
-        u.print_stats()
+    otr[0].print_stats()
+    f = fights.Figth(otr = otr)
+    f.startFight()
 
     
 if __name__ == "__main__":
