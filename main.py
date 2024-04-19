@@ -2,6 +2,7 @@ from story import shop, storyStartGame, shopForLVL1
 import fights
 from lvl import startLVL
 import heroes
+from enemy import *
 
 class Game():
     def __init__(self):

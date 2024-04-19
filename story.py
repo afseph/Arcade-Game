@@ -2,7 +2,7 @@ import heroes
 from typing import List
 
 def storyStartGame():
-    f_id = input("Выберите класс --->")
+    f_id = input("Выберите фракцию --->")
     return int(f_id)
 
 def shop(f_id) -> List[heroes.Hero]:

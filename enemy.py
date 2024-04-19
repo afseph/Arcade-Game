@@ -12,4 +12,4 @@ class Enemy:
         self.name = name
     
     def print_stats(self):
-        print(self.hp)
+        print(self.name ,self.hp)
