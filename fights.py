@@ -1,8 +1,10 @@
 from typing import List
 from copy import deepcopy
+from time import sleep
 import random
 from enemy import *
 from heroes import *
+
 
 
 def makeEnemyOtr() -> List[Enemy]:
@@ -16,23 +18,191 @@ def makeEnemyOtr() -> List[Enemy]:
     while len(enemy_otr) != 3:
         enemy = deepcopy(random.choice(enemies))
         enemy_otr.append(enemy)
+        # enemy = enemies.pop(random.randint(0, len(enemies)-1))
+        # enemy_otr.append(enemy)
     return enemy_otr
 
 
 class Figth:
-    def __init__(self, otr:list) -> None:
+    def setSelfOTR(self, otr):
         self.otr = otr
+
+    def setSelfEnemyOTR(self):
         self.enemy_otr = makeEnemyOtr()
 
     def dealDamage(self, u1, u2):
-        u1.hp -= (u2.attack - u1.defence * 0.5)
-    
-    def startFight(self):
-        self.dealDamage(u1 = self.otr[0], u2 = self.enemy_otr[0])
-        self.otr[0].print_stats()
-        self.dealDamage(u1 = self.enemy_otr[0], u2 = self.otr[0])
-        self.enemy_otr[0].print_stats()
-        
+        total_dmg = (u2.attack - u1.defence * 0.5)
+        if total_dmg < 0:
+            total_dmg = 0
+        if u1.hp < total_dmg:
+            u1.hp = 0
+        else:
+            u1.hp -= total_dmg
+        return total_dmg
+
+    def printInfo(self, otr, hp_diff="0", a_index=10):
+        if a_index == 0:
+            # TODO Colorize hp diff for unit 1
+            print(f"""
+                    =============             =============
+                    1:{otr[0].name}                    4:{self.enemy_otr[0].name}
+                    {hp_diff}                    {self.enemy_otr[0].hp}
+                    =============             =============
+                    2:{otr[1].name}                       5:{self.enemy_otr[1].name}
+                    {otr[1].hp}                    {self.enemy_otr[1].hp}
+                    =============             =============
+                    3:{otr[2].name}                    6:{self.enemy_otr[2].name}
+                    {otr[2].hp}                    {self.enemy_otr[2].hp}
+                    =============             =============
+                    """)
+        if a_index == 1:
+            # TODO Colorize hp diff for unit 2
+            print(f"""
+                    =============             =============
+                    1:{otr[0].name}                    4:{self.enemy_otr[0].name}
+                    {otr[0].hp}                    {self.enemy_otr[0].hp}
+                    =============             =============
+                    2:{otr[1].name}                       5:{self.enemy_otr[1].name}
+                    {hp_diff}                    {self.enemy_otr[1].hp}
+                    =============             =============
+                    3:{otr[2].name}                    6:{self.enemy_otr[2].name}
+                    {otr[2].hp}                    {self.enemy_otr[2].hp}
+                    =============             =============
+                    """)
+        if a_index == 2:
+            # TODO Colorize hp diff for unit 3
+            print(f"""
+                    =============             =============
+                    1:{otr[0].name}                    4:{self.enemy_otr[0].name}
+                    {otr[0].hp}                    {self.enemy_otr[0].hp}
+                    =============             =============
+                    2:{otr[1].name}                       5:{self.enemy_otr[1].name}
+                    {otr[1].hp}                    {self.enemy_otr[1].hp}
+                    =============             =============
+                    3:{otr[2].name}                    6:{self.enemy_otr[2].name}
+                    {hp_diff}                    {self.enemy_otr[2].hp}
+                    =============             =============
+                    """)
+        if a_index == 3:
+            # TODO Colorize hp diff for unit 4
+            print(f"""
+                    =============             =============
+                    1:{otr[0].name}                    4:{self.enemy_otr[0].name}
+                    {otr[0].hp}                    {hp_diff}
+                    =============             =============
+                    2:{otr[1].name}                       5:{self.enemy_otr[1].name}
+                    {otr[1].hp}                    {self.enemy_otr[1].hp}
+                    =============             =============
+                    3:{otr[2].name}                    6:{self.enemy_otr[2].name}
+                    {otr[2].hp}                    {self.enemy_otr[2].hp}
+                    =============             =============
+                    """)
+        if a_index == 4:
+            # TODO Colorize hp diff for unit 5
+            print(f"""
+                    =============             =============
+                    1:{otr[0].name}                    4:{self.enemy_otr[0].name}
+                    {otr[0].hp}                    {self.enemy_otr[0].hp}
+                    =============             =============
+                    2:{otr[1].name}                       5:{self.enemy_otr[1].name}
+                    {otr[1].hp}                    {hp_diff}
+                    =============             =============
+                    3:{otr[2].name}                    6:{self.enemy_otr[2].name}
+                    {otr[2].hp}                    {self.enemy_otr[2].hp}
+                    =============             =============
+                    """)
+        if a_index == 5:
+            # TODO Colorize hp diff for unit 6
+            print(f"""
+                    =============             =============
+                    1:{otr[0].name}                    4:{self.enemy_otr[0].name}
+                    {otr[0].hp}                    {self.enemy_otr[0].hp}
+                    =============             =============
+                    2:{otr[1].name}                       5:{self.enemy_otr[1].name}
+                    {otr[1].hp}                    {self.enemy_otr[1].hp}
+                    =============             =============
+                    3:{otr[2].name}                    6:{self.enemy_otr[2].name}
+                    {otr[2].hp}                    {hp_diff}
+                    =============             =============
+                    """)
+        if a_index == 10:
+            # Just printing info
+            print(f"""
+                    =============             =============
+                    1:{otr[0].name}                    4:{self.enemy_otr[0].name}
+                    {otr[0].hp}                    {self.enemy_otr[0].hp}
+                    =============             =============
+                    2:{otr[1].name}                       5:{self.enemy_otr[1].name}
+                    {otr[1].hp}                    {self.enemy_otr[1].hp}
+                    =============             =============
+                    3:{otr[2].name}                    6:{self.enemy_otr[2].name}
+                    {otr[2].hp}                    {self.enemy_otr[2].hp}
+                    =============             =============
+                    """)
+            
+    def makeChoice():
+         i = random.randint(1,3)
+         return i
+            
+    def makeMove(self, otr:List[Hero]):
+        steps_count = 1
+        curr_player = 0
+        is_otr_dead = True if len([True for i in otr if i.hp <= 0]) == 3 else False
+        is_enemy_otr_dead = True if len([True for i in self.enemy_otr if i.hp <= 0]) == 3 else False
+        while not is_enemy_otr_dead and not is_otr_dead:
+            hitter = random.randint(0,len(self.enemy_otr)-1)
+            while self.enemy_otr[hitter].hp == 0:
+                hitter = random.randint(0,len(self.enemy_otr)-1)
+            if steps_count % 2 == 0:
+                i = random.randint(0,len(otr)-1)
+                hp_diff = "-" + str(self.dealDamage(u1=otr[i], u2=self.enemy_otr[hitter]))
+                self.printInfo(otr=otr, hp_diff=str(hp_diff), a_index=i)
+                steps_count += 1
+                sleep(5)
+            else:
+                self.printInfo(otr=otr)
+                des = int(input("""
+                            Выбирите действие:
+                                1. Нанести удар
+                                2. Пропустить ход
+                            """))
+                if des >= 2:
+                    i = random.randint(0,len(otr)-1)
+                    hp_diff = "-" + str(self.dealDamage(u1=otr[i], u2=self.enemy_otr[hitter]))
+                    self.printInfo(otr=otr, hp_diff=str(hp_diff), a_index=i)
+                    sleep(5)
+                elif steps_count % 2 != 0:
+                    i = random.randint(0,len(self.enemy_otr)-1)
+                    hp_diff = "-" + str(self.dealDamage(u1=self.enemy_otr[hitter], u2=otr[curr_player]))
+                    self.printInfo(otr=otr, hp_diff=str(hp_diff), a_index=i+3)
+                    if curr_player == (len(otr)-1):
+                        curr_player = 0
+                    else:
+                        curr_player += 1
+                    steps_count += 1
+                    sleep(5)
+            is_otr_dead = True if len([True for i in otr if i.hp == 0]) == 3 else False
+            is_enemy_otr_dead = True if len([True for i in self.enemy_otr if i.hp == 0]) == 3 else False
+
+        return {
+            "is_enemy_otr_dead" : is_enemy_otr_dead,
+            "is_otr_dead" : is_otr_dead
+        }
+
+
+    def startFight(self, otr, enemy_lvl = 1, otr_cost = 0):
+        """
+            В функцию требуется передать отряд, цену отряда и уровень соперников(не обязательно)
+            Функция возвращает деньги полученные за битву
+        """
+        self.setSelfEnemyOTR()
+        dead = self.makeMove(otr=otr)
+        if dead.get("is_otr_dead"):
+            print("Вы проиграли")
+            return otr_cost + 200
+        else:
+            print("Вы выйграли")
+            return otr_cost * 2
 
 
 
