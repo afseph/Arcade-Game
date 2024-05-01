@@ -23,8 +23,8 @@ def makeEnemyOtr() -> List[Enemy]:
     return enemy_otr
 
 
-class Figth:
-    def setSelfOTR(self, otr):
+class Fight:
+    def setSelfOTR(self, otr:List[Hero]):
         self.otr = otr
 
     def setSelfEnemyOTR(self):
@@ -144,32 +144,59 @@ class Figth:
          i = random.randint(1,3)
          return i
             
+    def enemyMakeHit(self, otr, hitter, i):
+        hp_diff = "-" + str(self.dealDamage(u1=otr[i], u2=self.enemy_otr[hitter]))
+        self.printInfo(otr=otr, hp_diff=str(hp_diff), a_index=i)
+        sleep(5)
+
     def makeMove(self, otr:List[Hero]):
         steps_count = 1
         curr_player = 0
         is_otr_dead = True if len([True for i in otr if i.hp <= 0]) == 3 else False
         is_enemy_otr_dead = True if len([True for i in self.enemy_otr if i.hp <= 0]) == 3 else False
         while not is_enemy_otr_dead and not is_otr_dead:
+
             hitter = random.randint(0,len(self.enemy_otr)-1)
             while self.enemy_otr[hitter].hp == 0:
                 hitter = random.randint(0,len(self.enemy_otr)-1)
-            if steps_count % 2 == 0:
+            i = random.randint(0,len(otr)-1)
+            while otr[i].hp == 0:
                 i = random.randint(0,len(otr)-1)
-                hp_diff = "-" + str(self.dealDamage(u1=otr[i], u2=self.enemy_otr[hitter]))
-                self.printInfo(otr=otr, hp_diff=str(hp_diff), a_index=i)
+            while otr[curr_player].hp == 0:
+                curr_player += 1
+
+            if steps_count % 2 == 0:
+                self.enemyMakeHit(otr=otr, hitter=hitter, i=i)
                 steps_count += 1
-                sleep(5)
             else:
                 self.printInfo(otr=otr)
-                des = int(input("""
-                            Выбирите действие:
-                                1. Нанести удар
-                                2. Пропустить ход
-                            """))
+                if otr[curr_player].__class__.__name__ == "Medic":   
+                    des = int(input("""
+                                Выбирите действие:
+                                    0. Отхилить команду
+                                    1. Нанести удар
+                                    2. Пропустить ход
+                                """))
+                else:
+                    des = int(input("""
+                                Выбирите действие:
+                                    1. Нанести удар
+                                    2. Пропустить ход
+                                """))
+                                        
                 if des >= 2:
-                    i = random.randint(0,len(otr)-1)
-                    hp_diff = "-" + str(self.dealDamage(u1=otr[i], u2=self.enemy_otr[hitter]))
-                    self.printInfo(otr=otr, hp_diff=str(hp_diff), a_index=i)
+                    self.enemyMakeHit(otr=otr, hitter=hitter, i=i)
+                    steps_count += 1
+                elif des == 0:
+                    for u in otr:
+                        if u.hp != 0:
+                            u.hp += 25
+                    self.printInfo(otr=otr)
+                    if curr_player == (len(otr)-1):
+                        curr_player = 0
+                    else:
+                        curr_player += 1
+                    steps_count += 1
                     sleep(5)
                 elif steps_count % 2 != 0:
                     i = random.randint(0,len(self.enemy_otr)-1)
@@ -205,6 +232,7 @@ class Figth:
             return otr_cost * 2
 
 
-
+f = Fight()
+f.startFight(otr=[Medic(1),Archer(1),Medic(1)])
 
 
